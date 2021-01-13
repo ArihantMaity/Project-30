@@ -32,6 +32,13 @@ class Box {
        // rect(0,0,this.width,this.height)
         pop();
       }
+      
     }
+    score(){
+
+      if(this.visibility<0&&this.visibility>-200){
+           score=score+1
+        }
+      }
   };
   

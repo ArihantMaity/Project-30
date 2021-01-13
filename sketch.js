@@ -5,11 +5,15 @@ const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 
 var polygon,img;
-
+var score = 0
 var engine,world
+var bgimg,img1
+
 function preload()
 {
-	img=loadImage("polygon.png");
+  img=loadImage("polygon.png");
+  bgimg=loadImage("images/bg.png");
+  getTime();
 }
 
 function setup() {
@@ -79,12 +83,17 @@ sling=new launcher(this.polygon,{x:100,y:410});
 }
 
 
-function draw() {
-  rectMode(CENTER);
-  background("cyan");
 
+function draw() {
+if(getTime()){
+  rectMode(CENTER);
+  background(bgimg);
   imageMode(CENTER);
   image(img,polygon.position.x,polygon.position.y,40,40);
+
+  fill("red")
+  textSize(15)
+  text("Score :"+ score,50,50);
 
   ground1.display();
   ground2.display();
@@ -136,8 +145,44 @@ function draw() {
 
   sling.display();
 
+  box1.score();
+  box2.score();
+  box3.score();
+  box4.score();
+  box5.score();
+  box6.score();
+  box7.score();
+  box8.score();
+
+  box9.score();
+  box10.score();
+  box11.score();
+  box12.score();
+  box13.score();
+  box14.score();
+
+  box15.score();
+  box16.score();
+  box17.score();
+  box18.score();
+
+  box19.score();
+  box20.score();
+
+  box21.score();
+
+  box22.score();
+  box23.score();
+  box24.score();
+  box25.score();
+
+  box26.score();
+  box27.score();
+
+  box28.score();
+
   drawSprites();
- 
+}
 }
 
 function mouseDragged()
@@ -156,4 +201,18 @@ function keyPressed()
   if(keyCode===32){
      sling.attach(this.polygon);
   }
+}
+
+async function getTime(){
+  var response =  await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+  var collect =  await response.json();
+  var dt = collect.datetime.slice(11,13)
+ if(dt>06&&dt<18){
+   img1 = "images/bg2.jpg"
+ }
+ else{
+  img1 = "images/bg.png"
+ }
+ bgimg=loadImage(img1);
+ console.log(dt)
 }
